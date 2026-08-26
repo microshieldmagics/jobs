@@ -416,8 +416,7 @@
     import { 
       getAuth, 
       GoogleAuthProvider, 
-      signInWithRedirect, 
-      getRedirectResult, 
+      signInWithPopup, 
       signOut,
       onAuthStateChanged 
     } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
@@ -451,20 +450,6 @@
       db = getFirestore(app);
       googleProvider = new GoogleAuthProvider();
       googleProvider.setCustomParameters({ prompt: 'select_account' });
-
-      // Handle redirect authentication response on page load
-      getRedirectResult(auth)
-        .then((result) => {
-          if (result?.user) {
-            showToast("Successfully signed in with Google!", "success");
-          }
-        })
-        .catch((error) => {
-          if (error.code !== 'auth/popup-closed-by-user') {
-            console.error("Redirect sign-in error:", error.code, error.message);
-            showToast(`Sign-in failed (${error.code || 'error'}). ${error.message || ''}`, "error");
-          }
-        });
     } catch (e) {
       console.error("Initialization check:", e);
     }
@@ -543,20 +528,42 @@
       });
     }
 
-    // Google Redirect Sign-In Handler
+    // Google Popup Sign-In Handler
+    // FIX: signInWithRedirect navigates the whole page away to Google and back,
+    // which depends on the redirect result surviving a full reload — this breaks
+    // in embedded/preview windows, third-party-cookie-restricted browsers, and
+    // some in-app webviews, and can leave the user stuck signed-out even after
+    // successfully authenticating with Google. signInWithPopup completes in a
+    // small popup window without navigating the main page at all, so the result
+    // comes back immediately and reliably.
     window.triggerGoogleAuth = async () => {
       if (!auth) {
         showToast("Connection issue. Please try refreshing.", "error");
         return;
       }
       try {
-        await signInWithRedirect(auth, googleProvider);
+        const result = await signInWithPopup(auth, googleProvider);
+        if (result?.user) {
+          showToast("Successfully signed in with Google!", "success");
+          // If a job modal was open waiting on auth, resume it right away.
+          if (activeJobId) {
+            handleViewJob(activeJobId);
+          }
+        }
       } catch (err) {
         console.error("Google sign-in error:", err.code, err.message);
-        if (err.code === 'auth/network-request-failed') {
+        if (err.code === 'auth/popup-closed-by-user' || err.code === 'auth/cancelled-popup-request') {
+          // User just closed the popup — not a real error, no need to alarm them.
+          return;
+        }
+        if (err.code === 'auth/popup-blocked') {
+          showToast("Your browser blocked the sign-in popup. Please allow popups for this site and try again.", "error");
+        } else if (err.code === 'auth/network-request-failed') {
           showToast("Network error. Please check your internet connection.", "error");
+        } else if (err.code === 'auth/unauthorized-domain') {
+          showToast("This domain isn't authorized for sign-in yet. Add it under Firebase Console → Authentication → Settings → Authorized domains.", "error");
         } else {
-          showToast(`Unable to initiate sign-in (${err.code || 'error'}). ${err.message || ''}`, "error");
+          showToast(`Unable to sign in (${err.code || 'error'}). ${err.message || ''}`, "error");
         }
       }
     };
