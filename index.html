@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth dark">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,27 +8,46 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Google Fonts: Plus Jakarta Sans -->
+  <!-- Google Fonts: Fraunces (display) / Work Sans (body) / Space Grotesk (labels) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Work+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
   <script>
     tailwind.config = {
       darkMode: 'class',
       theme: {
         extend: {
           fontFamily: {
-            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            sans: ['"Work Sans"', 'sans-serif'],
+            display: ['"Fraunces"', 'serif'],
+            label: ['"Space Grotesk"', 'sans-serif'],
           },
           colors: {
-            brand: {
-              50: '#eef2ff',
-              100: '#e0e7ff',
-              500: '#6366f1',
-              600: '#4f46e5',
-              700: '#4338ca',
-            }
+            // ===== Warm luxury token system =====
+            // "indigo" -> deep bottle forest (primary interactive)
+            indigo: { 50:'#EAF0EA',100:'#CFE0D0',200:'#B9D6BC',300:'#3D7D5D',400:'#2F6B49',500:'#3D8B5C',600:'#1F4D36',700:'#153A28' },
+            // "purple" -> antique brass gold (luxury accent)
+            purple: { 50:'#FBF6EC',100:'#F3E6C8',200:'#E4C888',300:'#C79A3D',400:'#96741F',500:'#B08D2A',600:'#8C6E1F',700:'#6E561A' },
+            // "pink" -> warm copper (secondary gradient tail / social accent)
+            pink: { 50:'#FBF0E8',100:'#F0DAC6',200:'#DDB48C',300:'#C17847',400:'#A85D3A',500:'#C17847',600:'#8C4A2C' },
+            // "emerald" -> moss/sage (success, unlock actions)
+            emerald: { 50:'#F1F6EC',100:'#D7E4C8',200:'#C3D6AC',300:'#7FA25E',400:'#4F7F42',500:'#5C8F4C',600:'#3D6633' },
+            // "teal" -> brass (paired with moss in unlock-button gradients)
+            teal: { 400:'#C79A3D',500:'#B08D2A',600:'#96741F' },
+            // "amber" -> warm honey/ochre (pending / trust states)
+            amber: { 50:'#FBF6EC',100:'#F3E6C0',200:'#EED9A0',300:'#C79A3D',400:'#B4872A',500:'#C79A3D',600:'#96741F' },
+            // "red" -> oxblood wine (reject / error)
+            red: { 50:'#FBF0F0',100:'#F0D9D9',200:'#E8C9C9',300:'#B06767',400:'#8C3A3A',500:'#7A2331',600:'#611C27' },
+            // "blue" -> muted deep pine (used only for one social icon)
+            blue: { 400:'#2F5D45',500:'#264B38' },
+            // "slate" -> repurposed as the paper/ink neutral scale.
+            // 200-600 = text (200 darkest/boldest ... 600 lightest/most muted).
+            // 800/900/950 = backgrounds (800 = dark ink plaque, 900/950 = deep champagne paper).
+            slate: {
+              50:'#FBF7EE',100:'#F6EFE1',200:'#241C10',300:'#33281A',400:'#6B5A3E',
+              500:'#8A7A5C',600:'#9C8D6E',700:'#3A2E1C',800:'#2B4536',900:'#EBDFC0',950:'#E9DCB8'
+            },
           }
         }
       }
@@ -37,48 +56,48 @@
 
   <style>
     body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: #0b0f19;
-      color: #f1f5f9;
+      font-family: 'Work Sans', sans-serif;
+      background-color: #F6EFE1;
+      color: #241C10;
     }
 
-    /* Glassmorphism Classes */
+    /* Warm "foiled stationery" card system */
     .glass-card {
-      background: rgba(18, 24, 38, 0.65);
+      background: rgba(255, 253, 248, 0.72);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      border: 1px solid rgba(176, 141, 42, 0.22);
+      box-shadow: 0 8px 28px 0 rgba(43, 30, 10, 0.10);
     }
 
     .glass-card-hover {
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .glass-card-hover:hover {
-      background: rgba(26, 35, 55, 0.75);
-      border-color: rgba(99, 102, 241, 0.4);
+      background: rgba(255, 253, 248, 0.92);
+      border-color: rgba(176, 141, 42, 0.5);
       transform: translateY(-4px);
-      box-shadow: 0 12px 40px -10px rgba(79, 70, 229, 0.3);
+      box-shadow: 0 14px 38px -10px rgba(176, 141, 42, 0.38);
     }
 
     .glass-nav {
-      background: rgba(11, 15, 25, 0.75);
+      background: rgba(246, 239, 225, 0.82);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom: 1px solid rgba(176, 141, 42, 0.2);
     }
 
     .glass-input {
-      background: rgba(15, 23, 42, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 253, 248, 0.75);
+      border: 1px solid rgba(36, 28, 16, 0.16);
       backdrop-filter: blur(10px);
     }
     .glass-input:focus {
-      border-color: #6366f1;
-      box-shadow: 0 0 15px rgba(99, 102, 241, 0.25);
+      border-color: #B08D2A;
+      box-shadow: 0 0 0 3px rgba(176, 141, 42, 0.18);
     }
 
-    /* Shimmer Effect */
+    /* Shimmer Effect - warm gold foil sweep */
     .shine-button {
       position: relative;
       overflow: hidden;
@@ -93,7 +112,7 @@
       background: linear-gradient(
         60deg,
         transparent,
-        rgba(255, 255, 255, 0.15),
+        rgba(255, 234, 190, 0.45),
         transparent
       );
       transform: rotate(30deg);
@@ -103,14 +122,14 @@
       translate: 100% 100%;
     }
 
-    /* Glowing Radial Orbs */
+    /* Ambient warm glow (gold + forest, very low opacity) */
     .ambient-orb-1 {
       position: absolute;
       top: -10%;
       left: 15%;
       width: 500px;
       height: 500px;
-      background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+      background: radial-gradient(circle, rgba(176, 141, 42, 0.14) 0%, rgba(0, 0, 0, 0) 70%);
       pointer-events: none;
     }
     .ambient-orb-2 {
@@ -119,7 +138,7 @@
       right: -5%;
       width: 600px;
       height: 600px;
-      background: radial-gradient(circle, rgba(168, 85, 247, 0.12) 0%, rgba(0, 0, 0, 0) 70%);
+      background: radial-gradient(circle, rgba(47, 107, 73, 0.10) 0%, rgba(0, 0, 0, 0) 70%);
       pointer-events: none;
     }
 
@@ -128,17 +147,23 @@
       width: 8px;
     }
     ::-webkit-scrollbar-track {
-      background: #0b0f19;
+      background: #F6EFE1;
     }
     ::-webkit-scrollbar-thumb {
-      background: #1e293b;
+      background: #D9C89A;
       border-radius: 4px;
     }
     ::-webkit-scrollbar-thumb:hover {
-      background: #334155;
+      background: #B08D2A;
+    }
+
+    ::selection {
+      background: #1F4D36;
+      color: #FBF7EE;
     }
   </style>
 </head>
+
 <body class="selection:bg-indigo-500 selection:text-white relative overflow-x-hidden min-h-screen">
 
   <!-- Ambient Background Lighting -->
@@ -158,7 +183,7 @@
           <img src="https://i.postimg.cc/JnSv7KDx/IMG-20260825-WA0003.jpg" alt="Jobs In Dhangadhi Logo" class="h-11 w-11 rounded-[14px] object-cover bg-slate-900" onerror="this.src='https://via.placeholder.com/44?text=JD'">
         </div>
         <div>
-          <span class="font-extrabold text-xl text-white tracking-tight block leading-tight">Jobs In <span class="bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">Dhangadhi</span></span>
+          <span class="font-display italic font-semibold text-xl text-[#241C10] tracking-tight block leading-tight">Jobs In <span class="bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent">Dhangadhi</span></span>
           <span class="text-[10px] text-slate-400 font-medium tracking-wider uppercase">Premium Career Hub</span>
         </div>
       </a>
@@ -173,7 +198,7 @@
 
       <!-- User Auth Profile Status -->
       <div class="hidden md:flex items-center gap-4">
-        <div id="user-badge" class="hidden items-center gap-3 glass-card px-3.5 py-1.5 rounded-full border border-white/10">
+        <div id="user-badge" class="hidden items-center gap-3 glass-card px-3.5 py-1.5 rounded-full border border-[#B08D2A]/25">
           <img id="user-avatar" src="" class="w-7 h-7 rounded-full object-cover ring-2 ring-indigo-500/50">
           <span id="user-name" class="text-xs font-bold text-slate-200"></span>
           <button onclick="handleSignOut()" class="text-slate-400 hover:text-red-400 text-xs ml-1" title="Sign out"><i class="fa-solid fa-right-from-bracket"></i></button>
@@ -185,18 +210,18 @@
       </div>
 
       <!-- Mobile Hamburger Button -->
-      <button onclick="toggleMobileMenu()" class="md:hidden text-slate-300 hover:text-white text-2xl focus:outline-none p-2">
+      <button onclick="toggleMobileMenu()" class="md:hidden text-slate-300 hover:text-[#1F4D36] text-2xl focus:outline-none p-2">
         <i class="fa-solid fa-bars-staggered"></i>
       </button>
     </div>
 
     <!-- Mobile Navigation Drawer -->
-    <div id="mobile-menu" class="hidden md:hidden glass-card border-b border-white/10 px-6 py-6 space-y-4">
+    <div id="mobile-menu" class="hidden md:hidden glass-card border-b border-[#B08D2A]/25 px-6 py-6 space-y-4">
       <a href="#home" onclick="toggleMobileMenu()" class="block font-semibold text-slate-200 hover:text-indigo-400">Home</a>
       <a href="#jobs" onclick="toggleMobileMenu()" class="block font-semibold text-slate-200 hover:text-indigo-400">Find Jobs</a>
       <a href="#about" onclick="toggleMobileMenu()" class="block font-semibold text-slate-200 hover:text-indigo-400">About Us</a>
       <a href="#contact" onclick="toggleMobileMenu()" class="block font-semibold text-slate-200 hover:text-indigo-400">Contact Us</a>
-      <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+      <div class="pt-4 border-t border-[#B08D2A]/25 flex items-center justify-between">
         <button id="mobile-login-btn" onclick="triggerGoogleAuth(); toggleMobileMenu();" class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-3 rounded-xl font-bold text-sm shadow-lg shadow-indigo-600/30 flex items-center justify-center gap-2">
           <i class="fa-brands fa-google"></i> Continue with Google
         </button>
@@ -208,11 +233,11 @@
   <section id="home" class="relative py-20 md:py-32 overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
       
-      <span class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs font-bold uppercase tracking-widest mb-8 backdrop-blur-md">
+      <span class="font-label inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs font-bold uppercase tracking-widest mb-8 backdrop-blur-md">
         <span class="w-2 h-2 rounded-full bg-indigo-400 animate-ping"></span> Far-Western Nepal's Verified Job Platform
       </span>
 
-      <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold text-white tracking-tight leading-[1.15] max-w-5xl mx-auto mb-6">
+      <h1 class="font-display text-4xl sm:text-6xl md:text-7xl font-semibold text-[#241C10] tracking-tight leading-[1.08] max-w-5xl mx-auto mb-6">
         Unlock Premium Career Opportunities in <span class="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Dhangadhi</span>
       </h1>
 
@@ -226,7 +251,7 @@
           <div class="w-12 h-12 bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 rounded-xl flex items-center justify-center text-xl mx-auto mb-3">
             <i class="fa-solid fa-users"></i>
           </div>
-          <h3 class="font-extrabold text-2xl text-white mb-0.5">1,200+</h3>
+          <h3 class="font-label font-bold text-2xl text-[#241C10] mb-0.5">1,200+</h3>
           <p class="text-xs font-medium text-slate-400">Verified Job Seekers</p>
         </div>
 
@@ -234,7 +259,7 @@
           <div class="w-12 h-12 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-xl flex items-center justify-center text-xl mx-auto mb-3">
             <i class="fa-solid fa-circle-check"></i>
           </div>
-          <h3 class="font-extrabold text-2xl text-white mb-0.5">100%</h3>
+          <h3 class="font-label font-bold text-2xl text-[#241C10] mb-0.5">100%</h3>
           <p class="text-xs font-medium text-slate-400">Authentic Openings</p>
         </div>
 
@@ -242,7 +267,7 @@
           <div class="w-12 h-12 bg-purple-500/10 border border-purple-500/20 text-purple-400 rounded-xl flex items-center justify-center text-xl mx-auto mb-3">
             <i class="fa-solid fa-building"></i>
           </div>
-          <h3 class="font-extrabold text-2xl text-white mb-0.5">250+</h3>
+          <h3 class="font-label font-bold text-2xl text-[#241C10] mb-0.5">250+</h3>
           <p class="text-xs font-medium text-slate-400">Active Employers</p>
         </div>
 
@@ -250,7 +275,7 @@
           <div class="w-12 h-12 bg-amber-500/10 border border-amber-500/20 text-amber-400 rounded-xl flex items-center justify-center text-xl mx-auto mb-3">
             <i class="fa-solid fa-bolt"></i>
           </div>
-          <h3 class="font-extrabold text-2xl text-white mb-0.5">Instant</h3>
+          <h3 class="font-label font-bold text-2xl text-[#241C10] mb-0.5">Instant</h3>
           <p class="text-xs font-medium text-slate-400">Admin Response</p>
         </div>
       </div>
@@ -259,13 +284,13 @@
   </section>
 
   <!-- ================= MAIN JOB LISTINGS SECTION ================= -->
-  <section id="jobs" class="py-20 relative z-10 border-t border-white/5 bg-slate-950/40">
+  <section id="jobs" class="py-20 relative z-10 border-t border-[#241C10]/8 bg-slate-950/40">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
         <div>
-          <span class="text-xs font-bold text-indigo-400 uppercase tracking-widest block mb-1">Live Opportunities</span>
-          <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Featured Positions</h2>
+          <span class="font-label text-xs font-bold text-indigo-400 uppercase tracking-widest block mb-1">Live Opportunities</span>
+          <h2 class="font-display text-3xl sm:text-4xl font-semibold text-[#241C10] tracking-tight">Featured Positions</h2>
         </div>
 
         <!-- Search & Filter Controls -->
@@ -289,12 +314,12 @@
   </section>
 
   <!-- ================= ABOUT US SECTION ================= -->
-  <section id="about" class="py-20 relative z-10 border-t border-white/5">
+  <section id="about" class="py-20 relative z-10 border-t border-[#241C10]/8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <div>
-          <span class="text-xs font-bold text-indigo-400 uppercase tracking-widest block mb-2">Platform Mission</span>
-          <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-6">Elevating Career Connectivity in Sudurpashchim</h2>
+          <span class="font-label text-xs font-bold text-indigo-400 uppercase tracking-widest block mb-2">Platform Mission</span>
+          <h2 class="font-display text-3xl sm:text-4xl font-semibold text-[#241C10] tracking-tight mb-6">Elevating Career Connectivity in Sudurpashchim</h2>
           <p class="text-slate-400 leading-relaxed mb-4 text-sm sm:text-base">
             Jobs In Dhangadhi was built to modernize how job seekers connect with employment in Far-Western Nepal. We eradicate unverified agency listings, ensuring every position listed represents a genuine career opportunity.
           </p>
@@ -324,13 +349,13 @@
         </div>
         
         <div class="relative">
-          <div class="glass-card rounded-3xl p-8 sm:p-12 text-center border border-white/10 relative overflow-hidden group">
+          <div class="glass-card rounded-3xl p-8 sm:p-12 text-center border border-[#B08D2A]/25 relative overflow-hidden group">
             <div class="absolute inset-0 bg-gradient-to-tr from-indigo-600/10 to-purple-600/10 opacity-50 group-hover:opacity-100 transition-opacity"></div>
             <div class="relative z-10">
               <div class="w-20 h-20 bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 rounded-3xl flex items-center justify-center text-3xl mx-auto mb-6 group-hover:scale-110 transition-transform">
                 <i class="fa-solid fa-handshake font-light"></i>
               </div>
-              <h3 class="text-2xl font-bold text-white mb-2">Connecting Local Talent</h3>
+              <h3 class="font-display text-2xl font-semibold text-[#241C10] mb-2">Connecting Local Talent</h3>
               <p class="text-xs sm:text-sm text-slate-400 max-w-sm mx-auto leading-relaxed">Building a transparent digital bridge for Far-Western Nepal's workforce.</p>
             </div>
           </div>
@@ -340,38 +365,38 @@
   </section>
 
   <!-- ================= CONTACT US SECTION ================= -->
-  <section id="contact" class="py-20 relative z-10 border-t border-white/5 bg-slate-950/40">
+  <section id="contact" class="py-20 relative z-10 border-t border-[#241C10]/8 bg-slate-950/40">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <span class="text-xs font-bold text-indigo-400 uppercase tracking-widest block mb-2">Support & Verification</span>
-      <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-4">Direct Support Desk</h2>
+      <span class="font-label text-xs font-bold text-indigo-400 uppercase tracking-widest block mb-2">Support & Verification</span>
+      <h2 class="font-display text-3xl sm:text-4xl font-semibold text-[#241C10] tracking-tight mb-4">Direct Support Desk</h2>
       <p class="text-slate-400 max-w-xl mx-auto mb-12 text-sm">Have questions regarding application approvals or employer verification? Reach out directly across our official channels.</p>
 
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-4xl mx-auto">
         <!-- Facebook -->
         <a href="https://facebook.com" target="_blank" class="glass-card p-6 rounded-2xl glass-card-hover flex flex-col items-center group">
           <i class="fa-brands fa-facebook text-3xl text-blue-400 mb-3 group-hover:scale-110 transition-transform"></i>
-          <span class="font-bold text-white text-sm">Facebook</span>
+          <span class="font-bold text-[#241C10] text-sm">Facebook</span>
           <span class="text-[11px] text-slate-400 mt-1">Official Page</span>
         </a>
 
         <!-- WhatsApp -->
         <a href="https://wa.me/9779800000000" target="_blank" class="glass-card p-6 rounded-2xl glass-card-hover flex flex-col items-center group">
           <i class="fa-brands fa-whatsapp text-3xl text-emerald-400 mb-3 group-hover:scale-110 transition-transform"></i>
-          <span class="font-bold text-white text-sm">WhatsApp</span>
+          <span class="font-bold text-[#241C10] text-sm">WhatsApp</span>
           <span class="text-[11px] text-slate-400 mt-1">Instant Support</span>
         </a>
 
         <!-- Instagram -->
         <a href="https://instagram.com" target="_blank" class="glass-card p-6 rounded-2xl glass-card-hover flex flex-col items-center group">
           <i class="fa-brands fa-instagram text-3xl text-pink-400 mb-3 group-hover:scale-110 transition-transform"></i>
-          <span class="font-bold text-white text-sm">Instagram</span>
+          <span class="font-bold text-[#241C10] text-sm">Instagram</span>
           <span class="text-[11px] text-slate-400 mt-1">Latest Updates</span>
         </a>
 
         <!-- Call Now -->
         <a href="tel:+9779800000000" class="glass-card p-6 rounded-2xl glass-card-hover flex flex-col items-center group">
           <i class="fa-solid fa-phone text-3xl text-amber-400 mb-3 group-hover:scale-110 transition-transform"></i>
-          <span class="font-bold text-white text-sm">Direct Call</span>
+          <span class="font-bold text-[#241C10] text-sm">Direct Call</span>
           <span class="text-[11px] text-slate-400 mt-1">+977 98XXXXXXXX</span>
         </a>
       </div>
@@ -379,11 +404,11 @@
   </section>
 
   <!-- ================= FOOTER ================= -->
-  <footer class="border-t border-white/5 py-10 relative z-10 bg-slate-950">
+  <footer class="border-t border-[#241C10]/8 py-10 relative z-10 bg-slate-950">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
       <div class="flex items-center gap-3">
         <img src="https://i.postimg.cc/JnSv7KDx/IMG-20260825-WA0003.jpg" alt="Logo" class="h-8 w-8 rounded-lg object-cover">
-        <span class="font-bold text-white text-sm">Jobs In Dhangadhi</span>
+        <span class="font-display italic font-semibold text-[#241C10] text-sm">Jobs In Dhangadhi</span>
       </div>
       <p class="text-xs text-slate-500">&copy; 2026 Jobs In Dhangadhi. All rights reserved. MicroShield Magics</p>
     </div>
@@ -391,14 +416,14 @@
 
   <!-- ================= INTERACTIVE JOB DETAILS MODAL ================= -->
   <div id="job-detail-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-xl hidden items-center justify-center p-4 z-50 overflow-y-auto">
-    <div class="glass-card rounded-3xl max-w-lg w-full p-6 sm:p-8 border border-white/10 my-8 relative shadow-2xl">
+    <div class="glass-card rounded-3xl max-w-lg w-full p-6 sm:p-8 border border-[#B08D2A]/25 my-8 relative shadow-2xl">
       
-      <div class="flex items-center justify-between pb-4 border-b border-white/10">
+      <div class="flex items-center justify-between pb-4 border-b border-[#B08D2A]/25">
         <div>
-          <span id="modal-category" class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 bg-indigo-500/20 text-indigo-300 rounded-lg border border-indigo-500/30">Category</span>
-          <h3 id="modal-title" class="text-xl font-bold text-white mt-2">Job Title</h3>
+          <span id="modal-category" class="font-label text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 bg-indigo-500/20 text-indigo-300 rounded-lg border border-indigo-500/30">Category</span>
+          <h3 id="modal-title" class="font-display text-xl font-semibold text-[#241C10] mt-2">Job Title</h3>
         </div>
-        <button onclick="closeModal()" class="text-slate-400 hover:text-white text-xl p-2 rounded-xl hover:bg-white/5 transition-colors">
+        <button onclick="closeModal()" class="text-slate-400 hover:text-[#1F4D36] text-xl p-2 rounded-xl hover:bg-[#241C10]/5 transition-colors">
           <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
@@ -467,15 +492,15 @@
       const toast = document.createElement('div');
       
       const typeStyles = {
-        success: "bg-emerald-500/20 border-emerald-500/40 text-emerald-200",
-        error: "bg-red-500/20 border-red-500/40 text-red-200",
-        info: "bg-indigo-500/20 border-indigo-500/40 text-indigo-200"
+        success: "bg-[#F1F6EC]/90 border-[#5C8F4C]/40 text-[#2F4A26]",
+        error: "bg-[#FBF0F0]/90 border-[#7A2331]/35 text-[#5C1A24]",
+        info: "bg-[#FBF6EC]/90 border-[#B08D2A]/40 text-[#5C4917]"
       };
 
       const icons = {
-        success: "fa-circle-check text-emerald-400",
-        error: "fa-circle-exclamation text-red-400",
-        info: "fa-circle-info text-indigo-400"
+        success: "fa-circle-check text-[#3D6633]",
+        error: "fa-circle-exclamation text-[#7A2331]",
+        info: "fa-circle-info text-[#96741F]"
       };
 
       toast.className = `pointer-events-auto flex items-start gap-3 px-4 py-3 rounded-2xl border backdrop-blur-xl shadow-xl text-xs font-semibold animate-in fade-in slide-in-from-top-2 duration-300 ${typeStyles[type] || typeStyles.info}`;
@@ -638,16 +663,16 @@
               <span class="text-[10px] font-extrabold uppercase tracking-wider px-3 py-1 bg-indigo-500/10 text-indigo-300 border border-indigo-500/20 rounded-full">${job.category || 'General'}</span>
               <span class="text-xs font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 rounded-full">Fee: NPR ${job.serviceCharge || 0}</span>
             </div>
-            <h3 class="font-extrabold text-white text-xl mb-2 group-hover:text-indigo-300 transition-colors">${job.title}</h3>
+            <h3 class="font-display text-[#241C10] text-xl font-semibold mb-2 group-hover:text-indigo-400 transition-colors">${job.title}</h3>
             <p class="text-xs font-medium text-slate-400 mb-6 flex items-center gap-2">
               <i class="fa-solid fa-location-dot text-indigo-400"></i> ${job.generalLocation || 'Dhangadhi'}
             </p>
-            <div class="bg-slate-900/60 p-4 rounded-2xl border border-white/5 mb-6 text-xs">
+            <div class="bg-slate-900/60 p-4 rounded-2xl border border-[#241C10]/8 mb-6 text-xs">
               <span class="text-slate-500 block mb-1 font-semibold uppercase text-[10px] tracking-wider">Estimated Salary</span>
               <span class="font-bold text-slate-200 text-sm">${job.salary || 'Negotiable'}</span>
             </div>
           </div>
-          <button onclick="handleViewJob('${job.id}')" class="shine-button w-full bg-slate-800 hover:bg-gradient-to-r hover:from-indigo-600 hover:to-purple-600 text-white font-bold py-3.5 rounded-2xl text-sm transition-all shadow-md flex items-center justify-center gap-2 border border-white/10 hover:border-transparent">
+          <button onclick="handleViewJob('${job.id}')" class="shine-button w-full bg-slate-800 hover:bg-gradient-to-r hover:from-indigo-600 hover:to-purple-600 text-white font-bold py-3.5 rounded-2xl text-sm transition-all shadow-md flex items-center justify-center gap-2 border border-[#B08D2A]/25 hover:border-transparent">
             <span>View Opportunity</span>
             <i class="fa-solid fa-arrow-right text-xs"></i>
           </button>
@@ -722,7 +747,7 @@
               <div class="w-14 h-14 bg-red-500/10 border border-red-500/20 text-red-400 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-4">
                 <i class="fa-solid fa-triangle-exclamation"></i>
               </div>
-              <h4 class="font-bold text-white text-base mb-2">Couldn't Load Application Status</h4>
+              <h4 class="font-bold text-[#241C10] text-base mb-2">Couldn't Load Application Status</h4>
               <p class="text-xs text-slate-400 max-w-xs mx-auto mb-6 leading-relaxed">Error (${error.code}): ${error.message}</p>
               <button onclick="handleViewJob('${job.id}')" class="shine-button w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold py-3 rounded-2xl text-sm">Retry</button>
             </div>
@@ -739,7 +764,7 @@
           <div class="w-16 h-16 bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-4">
             <i class="fa-brands fa-google"></i>
           </div>
-          <h4 class="font-bold text-white text-lg mb-2">Google Sign-In Required</h4>
+          <h4 class="font-bold text-[#241C10] text-lg mb-2">Google Sign-In Required</h4>
           <p class="text-xs text-slate-400 max-w-xs mx-auto mb-8 leading-relaxed">Sign in with your Google account to submit your credentials and access employer contact info.</p>
           <button onclick="triggerAuthAndResume()" class="shine-button w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold py-3.5 rounded-2xl text-sm transition-all shadow-lg shadow-indigo-600/30">
             Continue with Google
@@ -756,27 +781,27 @@
       const body = document.getElementById('modal-content-body');
       body.innerHTML = `
         <div>
-          <h4 class="font-bold text-white text-base mb-1">One-Time Candidate Registration</h4>
+          <h4 class="font-bold text-[#241C10] text-base mb-1">One-Time Candidate Registration</h4>
           <p class="text-xs text-slate-400 mb-6">Complete your profile once to unlock fast access to current & future listings.</p>
           
           <form id="profile-form" class="space-y-4">
             <div>
               <label class="block text-[11px] font-bold uppercase text-slate-400 tracking-wider mb-1">Full Name *</label>
-              <input type="text" id="prof-name" required value="${currentUser.displayName || ''}" class="glass-input w-full px-4 py-2.5 rounded-xl text-sm text-white focus:outline-none">
+              <input type="text" id="prof-name" required value="${currentUser.displayName || ''}" class="glass-input w-full px-4 py-2.5 rounded-xl text-sm text-[#241C10] focus:outline-none">
             </div>
             <div class="grid grid-cols-2 gap-3">
               <div>
                 <label class="block text-[11px] font-bold uppercase text-slate-400 tracking-wider mb-1">Phone Number *</label>
-                <input type="text" id="prof-phone" required placeholder="98XXXXXXXX" class="glass-input w-full px-4 py-2.5 rounded-xl text-sm text-white focus:outline-none">
+                <input type="text" id="prof-phone" required placeholder="98XXXXXXXX" class="glass-input w-full px-4 py-2.5 rounded-xl text-sm text-[#241C10] focus:outline-none">
               </div>
               <div>
                 <label class="block text-[11px] font-bold uppercase text-slate-400 tracking-wider mb-1">Age *</label>
-                <input type="number" id="prof-age" required placeholder="24" class="glass-input w-full px-4 py-2.5 rounded-xl text-sm text-white focus:outline-none">
+                <input type="number" id="prof-age" required placeholder="24" class="glass-input w-full px-4 py-2.5 rounded-xl text-sm text-[#241C10] focus:outline-none">
               </div>
             </div>
             <div>
               <label class="block text-[11px] font-bold uppercase text-slate-400 tracking-wider mb-1">Current Address *</label>
-              <input type="text" id="prof-address" required placeholder="Dhangadhi-4, Kailali" class="glass-input w-full px-4 py-2.5 rounded-xl text-sm text-white focus:outline-none">
+              <input type="text" id="prof-address" required placeholder="Dhangadhi-4, Kailali" class="glass-input w-full px-4 py-2.5 rounded-xl text-sm text-[#241C10] focus:outline-none">
             </div>
             <div>
               <label class="block text-[11px] font-bold uppercase text-slate-400 tracking-wider mb-1">CV Screenshot Image *</label>
@@ -832,20 +857,20 @@
 
       body.innerHTML = `
         <div class="text-center">
-          <div class="bg-amber-500/10 border border-amber-500/20 rounded-2xl p-3 text-amber-300 text-xs font-semibold mb-5 flex items-center justify-between px-4">
+          <div class="bg-amber-500/10 border border-amber-500/20 rounded-2xl p-3 text-[#6E561A] text-xs font-semibold mb-5 flex items-center justify-between px-4">
             <span>Service Verification Charge:</span>
-            <strong class="text-sm font-extrabold text-amber-200">NPR ${job.serviceCharge || 0}</strong>
+            <strong class="text-sm font-extrabold text-[#4A3A11]">NPR ${job.serviceCharge || 0}</strong>
           </div>
 
-          <div class="bg-slate-900/80 border border-white/10 p-5 rounded-2xl mb-5">
-            <h5 class="font-bold text-white text-sm mb-1">${assignedQr.title || 'Official Payment QR'}</h5>
+          <div class="bg-slate-900/80 border border-[#B08D2A]/25 p-5 rounded-2xl mb-5">
+            <h5 class="font-bold text-[#241C10] text-sm mb-1">${assignedQr.title || 'Official Payment QR'}</h5>
             <p class="text-xs text-slate-400 mb-4">${assignedQr.description || 'Scan via mobile banking app to complete service charge.'}</p>
-            ${assignedQr.qrBase64 ? `<img src="${assignedQr.qrBase64}" class="w-48 h-48 object-contain mx-auto rounded-xl shadow-lg bg-white p-2 border border-white/10">` : '<div class="text-xs text-slate-500 py-8">QR Code Pending Assignment</div>'}
+            ${assignedQr.qrBase64 ? `<img src="${assignedQr.qrBase64}" class="w-48 h-48 object-contain mx-auto rounded-xl shadow-lg bg-white p-2 border border-[#B08D2A]/25">` : '<div class="text-xs text-slate-500 py-8">QR Code Pending Assignment</div>'}
           </div>
 
           ${reqStatus === 'pending' ? `
-            <div class="p-3.5 bg-amber-500/10 border border-amber-500/20 rounded-2xl text-amber-300 text-xs font-bold flex items-center justify-center gap-2.5">
-              <i class="fa-solid fa-spinner animate-spin text-amber-400"></i>
+            <div class="p-3.5 bg-amber-500/10 border border-amber-500/20 rounded-2xl text-[#6E561A] text-xs font-bold flex items-center justify-center gap-2.5">
+              <i class="fa-solid fa-spinner animate-spin text-[#96741F]"></i>
               Payment Submitted — Awaiting Admin Verification
             </div>
           ` : `
@@ -894,15 +919,15 @@
 
         body.innerHTML = `
           <div class="space-y-4">
-            <div class="p-3.5 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl text-emerald-300 text-xs font-bold flex items-center gap-2.5">
-              <i class="fa-solid fa-lock-open text-emerald-400"></i>
+            <div class="p-3.5 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl text-[#2F4A26] text-xs font-bold flex items-center gap-2.5">
+              <i class="fa-solid fa-lock-open text-[#3D6633]"></i>
               <span>Access Approved by Admin</span>
             </div>
 
-            <div class="bg-slate-900/80 p-5 rounded-2xl border border-white/10 text-xs space-y-3">
+            <div class="bg-slate-900/80 p-5 rounded-2xl border border-[#B08D2A]/25 text-xs space-y-3">
               <div>
                 <span class="text-slate-500 font-semibold block uppercase text-[10px] tracking-wider">Company / Employer</span>
-                <strong class="text-white text-sm">${details.employerName || 'Official Hiring Partner'}</strong>
+                <strong class="text-[#241C10] text-sm">${details.employerName || 'Official Hiring Partner'}</strong>
               </div>
               <div>
                 <span class="text-slate-500 font-semibold block uppercase text-[10px] tracking-wider">Contact Person</span>
@@ -938,7 +963,7 @@
             <div class="w-14 h-14 bg-red-500/10 border border-red-500/20 text-red-400 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-4">
               <i class="fa-solid fa-triangle-exclamation"></i>
             </div>
-            <h4 class="font-bold text-white text-base mb-2">Couldn't Load Employer Details</h4>
+            <h4 class="font-bold text-[#241C10] text-base mb-2">Couldn't Load Employer Details</h4>
             <p class="text-xs text-slate-400 max-w-xs mx-auto leading-relaxed">Error (${err.code}): ${err.message}</p>
           </div>
         `;
@@ -953,7 +978,7 @@
           <div class="w-14 h-14 bg-red-500/10 border border-red-500/20 text-red-400 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-4">
             <i class="fa-solid fa-circle-xmark"></i>
           </div>
-          <h4 class="font-bold text-white text-base mb-2">Request Not Approved</h4>
+          <h4 class="font-bold text-[#241C10] text-base mb-2">Request Not Approved</h4>
           <p class="text-xs text-slate-400 max-w-xs mx-auto mb-6 leading-relaxed">Payment verification could not be confirmed. Please contact support via WhatsApp or Call Now for direct assistance.</p>
         </div>
       `;
